@@ -8,7 +8,7 @@ Resource    ../Resources/Base_Keywords.robot
 Click User Menu Link
     Wait Until Element Is Visible    ${ACCOUNT_USERNAME_LINK}    timeout=10s
     Sleep    1s
-    Wait For Overlay    css:div.loader
+    Wait For Overlay    css=div.loader
     Click Element    ${ACCOUNT_USERNAME_LINK}
 
 
@@ -20,7 +20,7 @@ Open User Menu
 Username Menu Should Contain
     [Arguments]    @{expected_items}
 
-    Wait For Overlay    css:div.PopUp
+    Wait For Overlay    css=div.PopUp
     ${username_menu}=    Get WebElements    ${ACCOUNT_USERNAME_MENU_LIST}
 
     FOR    ${index}     ${element}     IN ENUMERATE    @{username_menu}    start=0

@@ -9,7 +9,7 @@ Resource   Account_Menu_Keywords.robot
 *** Keywords ***
 Open Authorization Form
     Click User Menu Link
-    Wait Until Element Is Visible    ${LOGIN_INPUT_USERNAME}    timeout=10s
+    Wait Until Element Is Visible    ${SIGN_IN_INPUT_USERNAME}    timeout=10s
 
 Click Submit Button
     [Arguments]    ${locator}
