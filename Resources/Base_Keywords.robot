@@ -24,3 +24,7 @@ Title Should Contain
     [Arguments]    ${page_title}
     ${current_title}=    Get Title
     Should Contain  ${current_title}    ${page_title}
+
+Open Main Page
+    Click Element    ${HEADER_LOGO_LINK}
+    Wait Until Page Contains Element    ${ARTICLE_PRODUCTS}

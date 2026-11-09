@@ -10,17 +10,17 @@ Click Product Category Picture
     [Arguments]    ${category}
     Wait For Overlay    css=div.PopUp
     ${locator}=    Get From Dictionary    ${CATEGORY_LOCATORS}    ${category}
-     Click Element     ${locator}
+    Click Element     ${locator}
 
 Click Product At Position And Get Name
     [Arguments]    ${position}=1
     Wait Until Element Is Visible    ${PRODUCTS_LIST}    timeout=10s
     @{items}=    Get WebElements    ${PRODUCTS_LIST}
     ${index}=    Evaluate    ${position} - 1
-    Scroll Element Into View    ${VIRTUAL_FOOTER}
-
     @{products_name_list}=     Get WebElements    ${PRODUCT_NAME}
     ${product_name}=    Get Text    ${products_name_list}[${index}]
+
+    Scroll Element Into View     ${products_name_list}[${index}]
     Click Element    ${items}[${index}]
     Wait Until Element Is Visible    ${PRODUCT_ADD_TO_CART}    timeout=10s
     RETURN    ${product_name}
@@ -45,6 +45,6 @@ Cart Preview Should Displayed Added Product
 
 
 Select Product
-    [Arguments]    ${categoty}  ${position}
+    [Arguments]    ${categoty}    ${position}
     Click Product Category Picture    ${categoty}
-    ${product_name}=    Click Product At Position And Get Name    2
+    ${product_name}=    Click Product At Position And Get Name    ${position}

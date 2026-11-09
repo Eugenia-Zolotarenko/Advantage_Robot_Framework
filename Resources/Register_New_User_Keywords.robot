@@ -9,7 +9,9 @@ Resource   Auth_Keywords.robot
 
 Open Registration Form
     Open Authorization Form
-    Click Element With JS    ${CREATE_NEW_ACCOUNT_BUTTON}
+    Scroll Element Into View     ${CREATE_NEW_ACCOUNT_BUTTON}
+    Click Element     ${CREATE_NEW_ACCOUNT_BUTTON}
+#    Click Element With JS    ${CREATE_NEW_ACCOUNT_BUTTON}
 
 Enter Valid Registration Data
     [Arguments]    ${username}    ${email}    ${password}
