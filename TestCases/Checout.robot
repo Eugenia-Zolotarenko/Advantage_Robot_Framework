@@ -20,7 +20,7 @@ Logged In User Can Checout With SafePay Payment Method
     Proceed To Checkout
     Click Button Next
     Choose SafePay Payment Method
-    Fill Valid Payments Credentionals    &{PAYMENT_CREDENTIONALS}
+    Fill Valid Payments Credentionals    &{PAYMENT_CREDENTIALS}
     Click Button Pay Now
     Page Should Contain    Your tracking number is
     Page Should Contain    Your order number is

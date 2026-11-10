@@ -15,7 +15,8 @@ Test Teardown   Close Browser
 
 *** Test Cases ***
 
-New User Can Register, Buy A Product And Sign Out
+DRAFT New User Can Register, Buy A Product And Sign Out
+    [Tags]    draft
     [Setup]    Open Browser To Homepage
     ${username}    ${email}=    Generate Unique User
     Register New User             ${username}    ${email}    ${VALID_PASSWORD}
@@ -26,41 +27,42 @@ New User Can Register, Buy A Product And Sign Out
     Cart Link Displayed Amount Of Products    1
     Open Shopping Cart Immediately After Adding Product
     Proceed To Checkout
-    Checkout With SafePay         &{PAYMENT_CREDENTIONALS}
+    Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out
 
 
-User Can Sign In, Choose 3 Different Products, Buy Products And Sign Out
+
+DRAFT User Can Sign In, Choose 3 Different Products, Buy Products And Sign Out
     [Setup]    Prepare Existing User Session
-    Select Product       mice     1
+    Select Product      mice     1
     Add Selected Product To Cart
     Open Main Page
-    Select Product      speakers      2
+    Select Product      speakers      7
     Add Selected Product To Cart
     Open Main Page
-    Select Product       headphones    3
+    Select Product      headphones    3
     Add Selected Product To Cart
     Cart Link Displayed Amount Of Products    3
     Open Shopping Cart Immediately After Adding Product
     Proceed To Checkout
-    Checkout With SafePay         &{PAYMENT_CREDENTIONALS}
+    Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out
 
 
-User Can Sign In, Choose 3 Same Products, Buy Products And Sign Out
+DRAFT User Can Sign In, Choose 3 Same Products, Buy Products And Sign Out
     [Setup]    Prepare Existing User Session
-    Select Product       laptops     9
+    Select Product      laptops     10
     Add Selected Product To Cart
     Add Selected Product To Cart
     Add Selected Product To Cart
     Cart Link Displayed Amount Of Products    3
     Open Shopping Cart Immediately After Adding Product
     Proceed To Checkout
-    Checkout With SafePay         &{PAYMENT_CREDENTIONALS}
+    Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out
 
 
-User Can Sign In, Choose 1 Diffrernt And 2 Same Products, Buy Products And Sign Out
+DRAFT User Can Sign In, Choose 1 Diffrernt And 2 Same Products, Buy Products And Sign Out
     [Setup]    Prepare Existing User Session
     Select Product       tablets     3
     Add Selected Product To Cart
@@ -71,11 +73,11 @@ User Can Sign In, Choose 1 Diffrernt And 2 Same Products, Buy Products And Sign 
     Cart Link Displayed Amount Of Products    3
     Open Shopping Cart Immediately After Adding Product
     Proceed To Checkout
-    Checkout With SafePay         &{PAYMENT_CREDENTIONALS}
+    Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out
 
 
-User Can Sign In, Choose 2 Same And 1 Diffrernt Product, Buy Products And Sign Out
+DRAFT User Can Sign In, Choose 2 Same And 1 Diffrernt Product, Buy Products And Sign Out
     [Setup]    Prepare Existing User Session
     Select Product       headphones     134
     Add Selected Product To Cart
@@ -86,5 +88,14 @@ User Can Sign In, Choose 2 Same And 1 Diffrernt Product, Buy Products And Sign O
     Cart Link Displayed Amount Of Products    3
     Open Shopping Cart Immediately After Adding Product
     Proceed To Checkout
-    Checkout With SafePay         &{PAYMENT_CREDENTIONALS}
+    Checkout With SafePay         &{PAYMENT_CREDENTIALS}
+    Sign Out
+
+DRAFT WITH PARAMETERS User Can Sign In, Choose 3 Different Products, Buy Products And Sign Out
+    [Setup]    Prepare Existing User Session
+    Add Multiple Products To Cart    ${PRODUCTS_TO_BUY}
+    Cart Link Displayed Amount Of Products    3
+    Open Shopping Cart Immediately After Adding Product
+    Proceed To Checkout
+    Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out

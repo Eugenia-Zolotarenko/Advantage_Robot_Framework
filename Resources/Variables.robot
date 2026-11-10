@@ -14,4 +14,9 @@ ${VALID_PASSWORD}    secretpad0rD
 ...    laptops=${LAPTOPS}
 ...    mice=${MICE}
 
-&{PAYMENT_CREDENTIONALS}    SafePay_username=testSafePay    SafePay_password=testPSW1
+&{PAYMENT_CREDENTIALS}    SafePay_username=testSafePay    SafePay_password=testPSW1
+
+@{PRODUCTS_TO_BUY}
+...    mice|1
+...    speakers|7
+...    headphones|3

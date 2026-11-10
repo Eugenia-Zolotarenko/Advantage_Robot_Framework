@@ -1,5 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
+Library    String
 Library    Collections
 Resource   Base_Keywords.robot
 Resource   Variables.robot
@@ -65,3 +66,55 @@ Add Selected Product To Cart And Verify Cart Preview
     [Arguments]    ${product_name}
     Add Selected Product To Cart
     Cart Preview Should Displayed Added Product    ${product_name}
+
+OLD Add Multiple Products To Cart
+    [Arguments]    ${products}
+    ${total_products}=    Get Length    ${products}
+     FOR    ${index}    ${item}    IN ENUMERATE    @{products}
+            ${category}    ${position}=    Split String    ${item}    |
+
+            Select Product    ${category}    ${position}
+            Add Selected Product To Cart
+
+            # сurrent product  (index + 1)
+            ${current_step}=    Evaluate    ${index} + 1
+
+            # if currnt product is not the last, Open main page
+            IF    ${current_step} < ${total_products}
+                        Open Main Page
+                Open Main Page
+            END
+     END
+
+
+Add Multiple Products To Cart
+    [Arguments]    ${products}
+    ${total_products}=    Get Length    ${products}
+
+    FOR    ${index}    ${item}    IN ENUMERATE    @{products}
+        # Split string (max into 3 parts)
+        ${parts}=       Split String    ${item}    |
+        ${category}=    Set Variable    ${parts[0]}
+        ${position}=    Set Variable    ${parts[1]}
+
+        # If quantity ia absend,  set quantity by default to 1
+        ${parts_length}=    Get Length    ${parts}
+            IF    ${parts_length} == 3
+                  ${quantity}=    Set Variable    ${parts[2]}
+            ELSE
+                  ${quantity}=    Set Variable    1
+            END
+
+        Select Product    ${category}    ${position}
+
+        # Add product to cart ${quantity} times
+        FOR    ${click}    IN RANGE    ${quantity}
+            Add Selected Product To Cart
+        END
+
+        # if currnt product is not the last, Open main page
+        ${current_step}=    Evaluate    ${index} + 1
+        IF    ${current_step} < ${total_products}
+            Open Main Page
+        END
+    END
