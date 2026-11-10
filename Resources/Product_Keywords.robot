@@ -9,7 +9,9 @@ Resource   Locators.robot
 Click Product Category Picture
     [Arguments]    ${category}
     Wait For Overlay    css=div.PopUp
+    Wait For Overlay    css=#toolTipCart
     ${locator}=    Get From Dictionary    ${CATEGORY_LOCATORS}    ${category}
+    Wait Until Element Is Enabled    ${locator}
     Click Element     ${locator}
 
 Click Product At Position And Get Name
@@ -32,9 +34,17 @@ Product Page Should Display Product Name
     Should Contain   ${page_text}  ${product_name}    ignore_case=True
 
 Add Selected Product To Cart
+    Wait For Overlay    css=div.PopUp
+    Wait For Overlay    css=#toolTipCart
     Scroll Element Into View    ${PRODUCT_ADD_TO_CART}
-    Wait Until Element Is Visible    ${PRODUCT_ADD_TO_CART}
+    Wait Until Element Is Enabled    ${PRODUCT_ADD_TO_CART}    timeout=10s
+    Sleep    3s
+    Wait Until Keyword Succeeds    5x    2s    Click And Wait For Cart Popup
+
+Click And Wait For Cart Popup
     Click Element    ${PRODUCT_ADD_TO_CART}
+    Wait Until Element Is Visible    ${CHECKOUT_BUTTON_POP_UP}    timeout=3s
+
 
 Cart Preview Should Displayed Added Product
     [Arguments]    ${product_name}
@@ -48,3 +58,10 @@ Select Product
     [Arguments]    ${categoty}    ${position}
     Click Product Category Picture    ${categoty}
     ${product_name}=    Click Product At Position And Get Name    ${position}
+ #   RETURN     ${product_name}
+
+
+Add Selected Product To Cart And Verify Cart Preview
+    [Arguments]    ${product_name}
+    Add Selected Product To Cart
+    Cart Preview Should Displayed Added Product    ${product_name}

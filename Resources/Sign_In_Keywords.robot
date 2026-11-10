@@ -22,3 +22,4 @@ Login As User
     Open Authorization Form
     Enter Login Credentials    ${username}    ${password}
     Click Sign In Button
+    Wait Until Element Is Not Visible    ${SIGN_IN_INPUT_USERNAME}    timeout=15s

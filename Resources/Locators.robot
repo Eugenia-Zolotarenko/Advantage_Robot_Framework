@@ -49,6 +49,7 @@ ${PRODUCT_ADD_TO_CART}      name=save_to_cart
  # --- Cart ---
 ${CART_PREVIEW}            id=toolTipCart
 ${CART_CHECKOUT_BUTTON}    name=check_out_btn
+${CART_REMOVE_BUTTON}      css=a.remove.red
 
  # --- Checkout ---
 ${CHECKOUT_BUTTON_POP_UP}   id=checkOutPopUp

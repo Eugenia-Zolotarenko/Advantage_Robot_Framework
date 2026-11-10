@@ -26,5 +26,6 @@ Title Should Contain
     Should Contain  ${current_title}    ${page_title}
 
 Open Main Page
+    Wait For Overlay    css:div.PopUp
     Click Element    ${HEADER_LOGO_LINK}
-    Wait Until Page Contains Element    ${ARTICLE_PRODUCTS}
+    Wait Until Element Is Visible   ${ARTICLE_PRODUCTS}

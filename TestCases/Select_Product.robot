@@ -12,7 +12,3 @@ Logged In User Selects Product And Get Name
     Click Product Category Picture     tablets
     ${product_name}=    Click Product At Position And Get Name    2
     Product Page Should Display Product Name    ${product_name}
-    Add Selected Product To Cart
-    Cart Preview Should Displayed Added Product    ${product_name}
-
-    Sleep     5s

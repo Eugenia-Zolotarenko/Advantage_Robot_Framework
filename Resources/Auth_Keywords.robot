@@ -14,7 +14,8 @@ Open Authorization Form
 Click Submit Button
     [Arguments]    ${locator}
     Wait For Overlay    css:div.loader
-    Click Element With JS    ${locator}
+    Sleep    1s
+    Click Element    ${locator}
 
 Account Username Should Equal
     [Arguments]    ${expected_username}
