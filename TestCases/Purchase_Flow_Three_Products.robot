@@ -18,4 +18,11 @@ Buy Products Using Data From File
 *** Keywords ***
 Run Purchase Flow
     [Arguments]    ${products_string}    ${username}=${VALID_USERNAME}    ${password}=${VALID_PASSWORD}
-    User Can Sign In, Buy Selected Products And Sign Out    ${products_string}    ${username}    ${password}
+    ...    ${safepay_username}=testSafePay    ${safepay_password}=testPSW1
+    ...    ${first_name}=First Name    ${last_name}=Last Name    ${phone}=+0123456789
+    ...    ${country}=Austria    ${city}=Vienna    ${address}=Test Street 1
+    ...    ${postal_code}=1010    ${state}=Wien
+    User Can Sign In, Buy Selected Products And Sign Out
+    ...    ${products_string}    ${username}    ${password}
+    ...    ${safepay_username}    ${safepay_password}
+    ...    ${first_name}    ${last_name}    ${phone}    ${country}    ${city}    ${address}    ${postal_code}    ${state}

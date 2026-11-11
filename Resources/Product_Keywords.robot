@@ -44,6 +44,14 @@ Add Selected Product To Cart
     END
     Wait Until Keyword Succeeds    5x    2s    Click And Wait For Cart Popup
 
+Set Product Quantity
+    [Arguments]    ${quantity}
+    IF    int(${quantity}) > 1
+        Press Keys    ${PRODUCT_QUANTITY_INPUT}    CTRL+a
+        Press Keys    ${PRODUCT_QUANTITY_INPUT}    DELETE
+        Input Text    ${PRODUCT_QUANTITY_INPUT}    ${quantity}
+    END
+
 Click And Wait For Cart Popup
     Click Element    ${PRODUCT_ADD_TO_CART}
     Wait Until Element Is Visible    ${CHECKOUT_BUTTON_POP_UP}    timeout=3s
@@ -108,11 +116,8 @@ Add Multiple Products To Cart
             END
 
         Select Product    ${category}    ${position}
-
-        # Add product to cart ${quantity} times
-        FOR    ${click}    IN RANGE    ${quantity}
-            Add Selected Product To Cart
-        END
+        Set Product Quantity    ${quantity}
+        Add Selected Product To Cart
 
         # if currnt product is not the last, Open main page
         ${current_step}=    Evaluate    ${index} + 1

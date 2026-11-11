@@ -25,31 +25,48 @@ Prepare Existing User Session
 
 
 New User Can Register, Buy A Product And Sign Out
-     [Arguments]    ${products_list}
-     [Setup]      Open Browser To Homepage
-     [Teardown]   Close Browser
+    [Arguments]    ${products_string}    ${password}=${VALID_PASSWORD}
+    ...    ${safepay_username}=testSafePay    ${safepay_password}=testPSW1
+    ...    ${first_name}=First Name    ${last_name}=Last Name    ${phone}=+0123456789
+    ...    ${country}=Austria    ${city}=Vienna    ${address}=Test Street 1
+    ...    ${postal_code}=1010    ${state}=Wien
+    [Setup]      Open Browser To Homepage
+    [Teardown]   Close Browser
 
-     ${username}    ${email}=    Generate Unique User
-     Register New User    ${username}    ${email}    ${VALID_PASSWORD}
-     Sign Out
-     Login As User        ${username}    ${VALID_PASSWORD}
+    ${username}    ${email}=    Generate Unique User
+    Register New User    ${username}    ${email}    ${password}
+    Sign Out
+    Login As User    ${username}    ${password}
 
-     Add Multiple Products To Cart    ${products_list}
+    @{products}=    Split String    ${products_string}    ;
+    ${expected_amount}=    Calculate Total Quantity From Products List    ${products}
 
-     ${expected_amount}=    Calculate Total Quantity From Products List    ${products_list}
+    Add Multiple Products To Cart    ${products}
+    Cart Link Displayed Amount Of Products    ${expected_amount}
 
-     Cart Link Displayed Amount Of Products    ${expected_amount}
+    Open Shopping Cart Immediately After Adding Product
+    Proceed To Checkout
 
-     Open Shopping Cart Immediately After Adding Product
-     Proceed To Checkout
-     Checkout With SafePay         &{PAYMENT_CREDENTIALS}
-     Sign Out
+    &{shipping}=    Create Dictionary
+    ...    first_name=${first_name}    last_name=${last_name}    phone=${phone}
+    ...    country=${country}    city=${city}    address=${address}
+    ...    postal_code=${postal_code}    state=${state}
+    &{payment}=    Create Dictionary
+    ...    SafePay_username=${safepay_username}    SafePay_password=${safepay_password}
+
+    Fill shipping details    &{shipping}
+    Checkout With SafePay    &{payment}
+    Sign Out
 
 
 
 #User Can Sign In, Choose 2 Same And One Different Products, Buy Products And Sign Out
 User Can Sign In, Buy Selected Products And Sign Out
     [Arguments]    ${products_string}    ${username}=${VALID_USERNAME}    ${password}=${VALID_PASSWORD}
+    ...    ${safepay_username}=testSafePay    ${safepay_password}=testPSW1
+    ...    ${first_name}=First Name    ${last_name}=Last Name    ${phone}=+0123456789
+    ...    ${country}=Austria    ${city}=Vienna    ${address}=Test Street 1
+    ...    ${postal_code}=1010    ${state}=Wien
     [Setup]        Prepare Existing User Session    ${username}    ${password}
     [Teardown]     Close Browser
 
@@ -61,8 +78,16 @@ User Can Sign In, Buy Selected Products And Sign Out
 
     Open Shopping Cart Immediately After Adding Product
     Proceed To Checkout
-    Fill shipping details    &{SHIPPING_DETAILS}
-    Checkout With SafePay    &{PAYMENT_CREDENTIALS}
+
+    &{shipping}=    Create Dictionary
+    ...    first_name=${first_name}    last_name=${last_name}    phone=${phone}
+    ...    country=${country}    city=${city}    address=${address}
+    ...    postal_code=${postal_code}    state=${state}
+    &{payment}=    Create Dictionary
+    ...    SafePay_username=${safepay_username}    SafePay_password=${safepay_password}
+
+    Fill shipping details    &{shipping}
+    Checkout With SafePay    &{payment}
     Sign Out
 
 

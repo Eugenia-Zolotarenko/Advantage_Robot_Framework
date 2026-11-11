@@ -45,6 +45,7 @@ ${PRODUCT_NAME}       css=a.productName
 ${PRODUCT_PRICE}      css=a.productPrice
 ${VIRTUAL_FOOTER}     id=virtualFooter
 ${PRODUCT_ADD_TO_CART}      name=save_to_cart
+${PRODUCT_QUANTITY_INPUT}   name=quantity
 
 
  # --- Cart ---

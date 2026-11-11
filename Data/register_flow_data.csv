@@ -1,0 +1,7 @@
+*** Test Cases ***,${products_string},${password},${safepay_username},${safepay_password},${first_name},${last_name},${phone},${country},${city},${address},${postal_code},${state},[Tags]
+Register And Buy One Tablet,tablets|2|1,secretpad0rD,user_new1,NewPay1,Anna,Weber,+43177000001,Austria,Vienna,Ringstrasse 1,1010,Wien,register
+Register And Buy One Speaker,speakers|6|1,secretpad0rD,user_new2,NewPay2,Max,Bauer,+43177000002,Austria,Graz,Jakominiplatz 5,8010,Steiermark,register
+Register And Buy One Headphone,headphones|3|1,secretpad0rD,user_new3,NewPay3,Lisa,Huber,+43177000003,Austria,Salzburg,Mozartplatz 3,5020,Salzburg,register
+Register And Buy One Laptop,laptops|1|1,secretpad0rD,user_new1,NewPay1,Anna,Weber,+43177000001,Austria,Vienna,Ringstrasse 1,1010,Wien,register
+Register And Buy One Mouse,mice|8|1,secretpad0rD,user_new2,NewPay2,Max,Bauer,+43177000002,Austria,Graz,Jakominiplatz 5,8010,Steiermark,register
+Register And Buy One Tablet And Two Speakers,tablets|3|1;speakers|7|2,secretpad0rD,user_new3,NewPay3,Lisa,Huber,+43177000003,Austria,Salzburg,Mozartplatz 3,5020,Salzburg,register_mixed
