@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation     File for storing UI element locators (Page Objects).
+Resource    Variables.robot
 
 *** Variables ***
 
@@ -58,3 +59,17 @@ ${CHECOUT_RADIO_SAFE_PAY}    name=safepay
 ${CHECOUT_INPUT_SAFE_PAY_USERNAME}    name=safepay_username
 ${CHECOUT_INPUT_SAFE_PAY_PASSWORD}    name=safepay_password
 ${CHECOUT_BUTTON_PAY_NOW}    id=pay_now_btn_SAFEPAY
+${CHECKOUT_SHIPPING_DETAILS_LINK}    xpath=//a[normalize-space()='Edit shipping details']
+
+    # --- Shipping details ---
+${CHECOUT_INPUT_FIRST_NAME}    name=first_name
+${CHECOUT_INPUT_LAST_NAME}    name=last_name
+${CHECOUT_INPUT_PHONE_NUMBER}    name=phone_number
+${CHECOUT_DROPDOWN_COUNTRY}    name=countryListbox
+${CHECOUT_COUNTRY_OPTION}      xpath=//select[@name='countryListbox']/option[normalize-space()='${COUNTRY_NAME}']
+${CHECOUT_INPUT_CITY}    name=city
+${CHECOUT_INPUT_ADDRESS}    name=address
+${CHECOUT_INPUT_POSTAL_CODE}    name=postal_code
+${CHECOUT_INPUT_STATE_PROVINCE_REGION}    name=state_/_province_/_region
+${CHECOUT_CHECKBOX_SAVE_CHANGES}    name=agree_agreement
+

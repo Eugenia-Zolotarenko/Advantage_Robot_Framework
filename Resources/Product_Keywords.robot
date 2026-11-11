@@ -20,10 +20,8 @@ Click Product At Position And Get Name
     Wait Until Element Is Visible    ${PRODUCTS_LIST}    timeout=10s
     @{items}=    Get WebElements    ${PRODUCTS_LIST}
     ${index}=    Evaluate    ${position} - 1
-    @{products_name_list}=     Get WebElements    ${PRODUCT_NAME}
-    ${product_name}=    Get Text    ${products_name_list}[${index}]
-
-    Scroll Element Into View     ${products_name_list}[${index}]
+    ${product_name}=    Get Text    ${items}[${index}]
+    Scroll Element Into View    ${items}[${index}]
     Click Element    ${items}[${index}]
     Wait Until Element Is Visible    ${PRODUCT_ADD_TO_CART}    timeout=10s
     RETURN    ${product_name}
@@ -38,8 +36,12 @@ Add Selected Product To Cart
     Wait For Overlay    css=div.PopUp
     Wait For Overlay    css=#toolTipCart
     Scroll Element Into View    ${PRODUCT_ADD_TO_CART}
-    Wait Until Element Is Enabled    ${PRODUCT_ADD_TO_CART}    timeout=10s
     Sleep    3s
+    ${is_sold_out}=    Run Keyword And Return Status
+    ...    Page Should Contain Element    css=[data-ng-show*="OutOfStock"]:not(.ng-hide)
+    IF    ${is_sold_out}
+        Skip    Product is Sold Out
+    END
     Wait Until Keyword Succeeds    5x    2s    Click And Wait For Cart Popup
 
 Click And Wait For Cart Popup

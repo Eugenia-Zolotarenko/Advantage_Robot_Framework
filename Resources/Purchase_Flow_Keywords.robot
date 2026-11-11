@@ -1,5 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
+Library    String
 Resource    ../Resources/Base_Keywords.robot
 Resource    ../Resources/Register_New_User_Keywords.robot
 Resource    ../Resources/Sign_In_Keywords.robot
@@ -9,9 +10,16 @@ Resource    ../Resources/Sign_Out_Keywords.robot
 Resource    ../Resources/Variables.robot
 
 *** Keywords ***
+
+Run Purchase Flow
+    [Arguments]    ${products_string}    ${username}=${VALID_USERNAME}    ${password}=${VALID_PASSWORD}
+    User Can Sign In, Buy Selected Products And Sign Out    ${products_string}    ${username}    ${password}
+
+
 Prepare Existing User Session
+    [Arguments]    ${username}=${VALID_USERNAME}    ${password}=${VALID_PASSWORD}
     Open Browser To Homepage
-    Login As User    ${VALID_USERNAME}    ${VALID_PASSWORD}
+    Login As User    ${username}    ${password}
     Clear Shopping Cart
     Open Main Page
 
@@ -37,32 +45,15 @@ New User Can Register, Buy A Product And Sign Out
      Checkout With SafePay         &{PAYMENT_CREDENTIALS}
      Sign Out
 
-DRAFT User Can Sign In, Choose 3 Same Products, Buy Products And Sign Out
-    [Arguments]    ${category}    ${position}    ${quantity}
-    [Setup]    Prepare Existing User Session
-    [Teardown]    Close Browser
-
-    Select Product      ${category}     ${position}
-    #  Add product to cart ${quantity} times
-    FOR    ${index}    IN RANGE    ${quantity}
-        Add Selected Product To Cart
-    END
-
-    Cart Link Displayed Amount Of Products    ${quantity}
-
-    Open Shopping Cart Immediately After Adding Product
-    Proceed To Checkout
-    Checkout With SafePay         &{PAYMENT_CREDENTIALS}
-    Sign Out
 
 
 #User Can Sign In, Choose 2 Same And One Different Products, Buy Products And Sign Out
 User Can Sign In, Buy Selected Products And Sign Out
-    [Arguments]    ${products}
-    [Setup]        Prepare Existing User Session
+    [Arguments]    ${products_string}    ${username}=${VALID_USERNAME}    ${password}=${VALID_PASSWORD}
+    [Setup]        Prepare Existing User Session    ${username}    ${password}
     [Teardown]     Close Browser
 
-        # count total quantity of products
+    @{products}=    Split String    ${products_string}    ;
     ${total_quantity}=    Calculate Total Quantity From Products List    ${products}
 
     Add Multiple Products To Cart    ${products}
@@ -70,6 +61,7 @@ User Can Sign In, Buy Selected Products And Sign Out
 
     Open Shopping Cart Immediately After Adding Product
     Proceed To Checkout
+    Fill shipping details    &{SHIPPING_DETAILS}
     Checkout With SafePay    &{PAYMENT_CREDENTIALS}
     Sign Out
 
@@ -81,7 +73,7 @@ Calculate Total Quantity From Products List
     FOR    ${item}    IN    @{products_list}
         ${parts}=    Split String    ${item}    |
         ${parts_length}=    Get Length    ${parts}
-        # Если количество указано (длина 3), берем его, иначе считаем как 1 штуку
+        # if quantity not included in provided data, by defaule set to 1
         ${q}=    IF    ${parts_length} == 3    Set Variable    ${parts[2]}    ELSE    Set Variable    1
         ${calculated_amount}=    Evaluate    ${calculated_amount} + ${q}
     END
@@ -144,3 +136,22 @@ DRAFT User Can Sign In, Choose 3 Different Products, Buy Products And Sign Out
          Proceed To Checkout
          Checkout With SafePay         &{PAYMENT_CREDENTIALS}
          Sign Out
+
+
+DRAFT User Can Sign In, Choose 3 Same Products, Buy Products And Sign Out
+    [Arguments]    ${category}    ${position}    ${quantity}
+    [Setup]    Prepare Existing User Session
+    [Teardown]    Close Browser
+
+    Select Product      ${category}     ${position}
+    #  Add product to cart ${quantity} times
+    FOR    ${index}    IN RANGE    ${quantity}
+        Add Selected Product To Cart
+    END
+
+    Cart Link Displayed Amount Of Products    ${quantity}
+
+    Open Shopping Cart Immediately After Adding Product
+    Proceed To Checkout
+    Checkout With SafePay         &{PAYMENT_CREDENTIALS}
+    Sign Out

@@ -1,0 +1,13 @@
+# Robot Framework results
+output.xml
+log.html
+report.html
+Output/
+selenium-screenshot-*.png
+
+# Python virtual environment
+.venv/
+
+# IDE
+.idea/
+*.iml

@@ -11,7 +11,7 @@ Resource   ../Resources/Locators.robot
 @{SET_ONE_LAPTOP}     laptops|1|1
 @{SET_ONE_SPEAKER}    speakers|6|1
 @{SET_ONE_MOUSE}      mice|8|1
-@{SET_ONE_HEADPHONE}  headphones|78|1
+@{SET_ONE_HEADPHONE}  headphones|3|1
 
 
 # Set1     Same Product Different Models
@@ -33,9 +33,9 @@ Resource   ../Resources/Locators.robot
 ...    speakers|5|1
 
 @{THREE_MODELS_HEADPHONES_SET}
-...    headphones|20|1
-...    headphones|30|1
-...    headphones|40|1
+...    headphones|1|1
+...    headphones|2|1
+...    headphones|3|1
 
 @{THREE_MODELS_MOUSE_SET}
 ...    mice|7|1
@@ -70,7 +70,7 @@ Resource   ../Resources/Locators.robot
 @{THREE_PRODUCTS_SET_2}
 ...    tablets|3|1
 ...    laptops|11|1
-...    headphones|134|1
+...    headphones|1|1
 
  # Set 3    # ${category}    ${position}  ${quantity}
 @{THREE_PRODUCTS_SET_3}
@@ -85,11 +85,11 @@ Resource   ../Resources/Locators.robot
 ...    tablets|3|1
 ...    speakers|7|2
 
-# Mixed Set 2: 2 mouse (position 1) и 3 headphines (position 4)
+# Mixed Set 2: 2 mouse (position 2) и 1 headphone (position 5)
 # ${category}    ${position}    ${quantity}
 @{MIXED_SET_2}
 ...    mice|2|2
-...    headphones|4|1
+...    headphones|5|1
 
 *** Keywords ***
 Generate Unique User

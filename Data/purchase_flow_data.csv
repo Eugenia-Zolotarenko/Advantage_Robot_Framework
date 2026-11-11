@@ -1,0 +1,16 @@
+*** Test Cases ***,${products_string},${username},${password},[Tags]
+Buy Mouse Speaker And Headphones,mice|1|1;speakers|7|1;headphones|3|1,user10195449,secretpad0rD,smoke
+Buy Tablet Laptop And Headphones,tablets|3|1;laptops|11|1;headphones|1|1,user10195317,secretpad0rD,smoke
+Buy Mouse Speaker And Tablet,mice|9|1;speakers|1|1;tablets|1|1,user10195617,secretpad0rD,smoke
+Buy 1 Tablet And 2 Speakers,tablets|3|1;speakers|7|2,user10195347,secretpad0rD,mixed
+Buy 2 Mouse And 1 Headphones,mice|2|2;headphones|3|1,user10195520,secretpad0rD,mixed
+Buy Three Laptops,laptops|10|3,user10195417,secretpad0rD,quantity
+Buy Three Tablets,tablets|1|3,user10195617,secretpad0rD,quantity
+Buy Three Speakers,speakers|2|3,user10195317,secretpad0rD,quantity
+Buy Three Mice,mice|1|3,user10195449,secretpad0rD,quantity
+Buy Three Headphones,headphones|1|3,user10195520,secretpad0rD,quantity
+Buy Three Different Models Of Laptops,laptops|4|1;laptops|3|1;laptops|5|1,user10195347,secretpad0rD,models
+Buy Three Different Models Of Tablets,tablets|1|1;tablets|2|1;tablets|3|1,user10195617,secretpad0rD,models
+Buy Three Different Models Of Speakers,speakers|3|1;speakers|4|1;speakers|5|1,user10195417,secretpad0rD,models
+Buy Three Different Models Of Mice,mice|7|1;mice|6|1;mice|5|1,user10195317,secretpad0rD,models
+Buy Three Different Models Of Headphones,headphones|1|1;headphones|2|1;headphones|3|1,user10195449,secretpad0rD,control
