@@ -26,7 +26,10 @@ ${REGISTER_BUTTON}                    id=register_btn
 # --- Sign In ---
 ${SIGN_IN_INPUT_USERNAME}         name=username
 ${SIGN_IN_INPUT_PASSWORD}         name=password
-${SIGN_IN_BUTTON}               id=sign_in_btn
+${SIGN_IN_BUTTON}                 id=sign_in_btn
+${SIGN_IN_ERROR_MESSAGE}              id=signInResultMessage
+${SIGN_IN_USERNAME_REQUIRED_MSG}      css=sec-view[sec-name="username"] label.invalid
+${SIGN_IN_PASSWORD_REQUIRED_MSG}      css=sec-view[sec-name="password"] label.invalid
 
  # --- Account menu ---
 ${ACCOUNT_MENU_SIGN_OUT}    css=#loginMiniTitle label[translate='Sign_out']
