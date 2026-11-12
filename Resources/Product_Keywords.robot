@@ -21,8 +21,8 @@ Click Product At Position And Get Name
     @{items}=    Get WebElements    ${PRODUCTS_LIST}
     ${index}=    Evaluate    ${position} - 1
     ${product_name}=    Get Text    ${items}[${index}]
-    Scroll Element Into View    ${items}[${index}]
-    Click Element    ${items}[${index}]
+    Execute Javascript    arguments[0].scrollIntoView({block: 'center', behavior: 'instant'});    ARGUMENTS    ${items}[${index}]
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${items}[${index}]
     Wait Until Element Is Visible    ${PRODUCT_ADD_TO_CART}    timeout=10s
     RETURN    ${product_name}
 
@@ -35,7 +35,8 @@ Product Page Should Display Product Name
 Add Selected Product To Cart
     Wait For Overlay    css=div.PopUp
     Wait For Overlay    css=#toolTipCart
-    Scroll Element Into View    ${PRODUCT_ADD_TO_CART}
+    ${btn}=    Get WebElement    ${PRODUCT_ADD_TO_CART}
+    Execute Javascript    arguments[0].scrollIntoView({block: 'center', behavior: 'instant'});    ARGUMENTS    ${btn}
     Sleep    3s
     ${is_sold_out}=    Run Keyword And Return Status
     ...    Page Should Contain Element    css=[data-ng-show*="OutOfStock"]:not(.ng-hide)
@@ -53,8 +54,9 @@ Set Product Quantity
     END
 
 Click And Wait For Cart Popup
-    Click Element    ${PRODUCT_ADD_TO_CART}
-    Wait Until Element Is Visible    ${CHECKOUT_BUTTON_POP_UP}    timeout=3s
+    ${btn}=    Get WebElement    ${PRODUCT_ADD_TO_CART}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${btn}
+    Wait Until Element Is Visible    ${CHECKOUT_BUTTON_POP_UP}    timeout=6s
 
 
 Cart Preview Should Displayed Added Product

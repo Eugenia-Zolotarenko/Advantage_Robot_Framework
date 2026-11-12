@@ -20,15 +20,19 @@ Choose SafePay Payment Method
 Fill Valid Payments Credentionals
     [Arguments]    &{user_payment_credentionals}
     Scroll Element Into View    ${CHECOUT_INPUT_SAFE_PAY_USERNAME}
+    Sleep    0.5s
     Input Text    ${CHECOUT_INPUT_SAFE_PAY_USERNAME}    ${user_payment_credentionals}[SafePay_username]
     Scroll Element Into View    ${CHECOUT_INPUT_SAFE_PAY_PASSWORD}
+    Sleep    0.5s
     Input Password    ${CHECOUT_INPUT_SAFE_PAY_PASSWORD}    ${user_payment_credentionals}[SafePay_password]
     Element Should Be Enabled     ${CHECOUT_BUTTON_PAY_NOW}
 
 
 Click Button Pay Now
     Scroll Element Into View    ${CHECOUT_BUTTON_PAY_NOW}
-    Click Button                ${CHECOUT_BUTTON_PAY_NOW}
+    Sleep    0.5s
+    ${btn}=    Get WebElement    ${CHECOUT_BUTTON_PAY_NOW}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${btn}
     Wait Until Page Contains    Thank you for buying with Advantage
 
 
@@ -55,9 +59,11 @@ Fill shipping details
     Input Text    ${CHECOUT_INPUT_CITY}    ${shipping_details}[city]
 
     Scroll Element Into View    ${CHECOUT_INPUT_ADDRESS}
+    Sleep    0.5s
     Input Text    ${CHECOUT_INPUT_ADDRESS}         ${shipping_details}[address]
     Input Text    ${CHECOUT_INPUT_POSTAL_CODE}     ${shipping_details}[postal_code]
     Scroll Element Into View    ${CHECOUT_INPUT_STATE_PROVINCE_REGION}
+    Sleep    0.5s
     Input Text    ${CHECOUT_INPUT_STATE_PROVINCE_REGION}    ${shipping_details}[state]
 
 

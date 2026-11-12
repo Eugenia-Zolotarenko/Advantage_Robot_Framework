@@ -9,7 +9,8 @@ Click User Menu Link
     Wait Until Element Is Visible    ${ACCOUNT_USERNAME_LINK}    timeout=10s
     Sleep    1s
     Wait For Overlay    css=div.loader
-    Click Element    ${ACCOUNT_USERNAME_LINK}
+    ${link}=    Get WebElement    ${ACCOUNT_USERNAME_LINK}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${link}
 
 
 Open User Menu

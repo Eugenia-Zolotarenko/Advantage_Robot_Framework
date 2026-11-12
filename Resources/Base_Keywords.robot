@@ -17,8 +17,25 @@ Click Element With JS
     Execute Javascript    arguments[0].click();    ARGUMENTS    ${element}
 
 Open Browser To Homepage
-    Open Browser    ${BASE_URL}    ${BROWSER}
-    Maximize Browser Window
+    IF    '${BROWSER}' == 'headlessedge'
+        ${options}=    Evaluate    sys.modules['selenium.webdriver'].EdgeOptions()    sys
+        ${arg_headless}=    Set Variable    --headless=new
+        ${arg_port}=    Set Variable    --remote-debugging-port=0
+        ${arg_profile}=    Set Variable    --user-data-dir=C:\\Windows\\Temp\\edge-jenkins
+        Call Method    ${options}    add_argument    ${arg_headless}
+        Call Method    ${options}    add_argument    --disable-gpu
+        Call Method    ${options}    add_argument    --no-sandbox
+        Call Method    ${options}    add_argument    --disable-dev-shm-usage
+        Call Method    ${options}    add_argument    --disable-extensions
+        Call Method    ${options}    add_argument    --no-first-run
+        Call Method    ${options}    add_argument    --no-default-browser-check
+        Call Method    ${options}    add_argument    ${arg_port}
+        Call Method    ${options}    add_argument    ${arg_profile}
+        Open Browser    ${BASE_URL}    edge    options=${options}
+    ELSE
+        Open Browser    ${BASE_URL}    ${BROWSER}
+    END
+    Set Window Size    1920    1080
 
 Title Should Contain
     [Arguments]    ${page_title}

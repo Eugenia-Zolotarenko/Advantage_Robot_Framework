@@ -9,19 +9,22 @@ Resource    Locators.robot
 *** Keywords ***
 Open Shopping Cart Immediately After Adding Product
     Wait Until Element Is Visible     ${CHECKOUT_BUTTON_POP_UP}
-    Click Element    ${CHECKOUT_BUTTON_POP_UP}
+    ${btn}=    Get WebElement    ${CHECKOUT_BUTTON_POP_UP}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${btn}
     Wait Until Page Contains    ORDER PAYMENT
 
 Open Shopping Cart Any Time
-#    Wait Until Element Is Visible     ${CART_PREVIEW}
+    Wait For Overlay    css=div.PopUp
     Wait Until Element Is Not Visible     ${CART_PREVIEW}    timeout=10s
     Click Element    ${CART_LINK}
     Wait Until Page Contains    SHOPPING CART
 
 
 Proceed To Checkout
+    Wait For Overlay    css=div.loader
     Scroll Element Into View    ${CART_CHECKOUT_BUTTON}
-    Click Button    ${CART_CHECKOUT_BUTTON}
+    ${btn}=    Get WebElement    ${CART_CHECKOUT_BUTTON}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${btn}
     Wait Until Page Contains    ORDER PAYMENT
 
 
