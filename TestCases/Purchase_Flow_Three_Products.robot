@@ -10,7 +10,6 @@ Resource    ../Resources/Cart_Keywords.robot
 Resource    ../Resources/Checkout_Keywords.robot
 
 Test Template    Run Purchase Flow
-Test Tags        control_run
 
 *** Test Cases ***
 Buy Products Using Data From File

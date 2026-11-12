@@ -41,10 +41,11 @@ New User Can Register, Buy A Product And Sign Out
     @{products}=    Split String    ${products_string}    ;
     ${expected_amount}=    Calculate Total Quantity From Products List    ${products}
 
-    Add Multiple Products To Cart    ${products}
+    @{product_names}=    Add Multiple Products To Cart    ${products}
     Cart Link Displayed Amount Of Products    ${expected_amount}
 
-    Open Shopping Cart Immediately After Adding Product
+    Open Shopping Cart To Verify Products
+    Cart Should Contain Products    @{product_names}
     Proceed To Checkout
 
     &{shipping}=    Create Dictionary
@@ -73,10 +74,11 @@ User Can Sign In, Buy Selected Products And Sign Out
     @{products}=    Split String    ${products_string}    ;
     ${total_quantity}=    Calculate Total Quantity From Products List    ${products}
 
-    Add Multiple Products To Cart    ${products}
+    @{product_names}=    Add Multiple Products To Cart    ${products}
     Cart Link Displayed Amount Of Products    ${total_quantity}
 
-    Open Shopping Cart Immediately After Adding Product
+    Open Shopping Cart To Verify Products
+    Cart Should Contain Products    @{product_names}
     Proceed To Checkout
 
     &{shipping}=    Create Dictionary

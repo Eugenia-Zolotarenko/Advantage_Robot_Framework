@@ -13,7 +13,7 @@ Wait For Overlay
 Click Element With JS
     [Arguments]    ${locator}
     Wait Until Element Is Visible    ${locator}
-    ${element}=    Get Web Element    ${locator}
+    ${element}=    Get WebElement    ${locator}
     Execute Javascript    arguments[0].click();    ARGUMENTS    ${element}
 
 Open Browser To Homepage
@@ -35,7 +35,8 @@ Open Browser To Homepage
     ELSE
         Open Browser    ${BASE_URL}    ${BROWSER}
     END
-    Set Window Size    1920    1080
+    Set Window Size        1920    1080
+    Set Window Position    0       0
 
 Title Should Contain
     [Arguments]    ${page_title}

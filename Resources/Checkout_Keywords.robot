@@ -69,4 +69,6 @@ Fill shipping details
 
 
 Click Edit Shopping Details Link
-    Click Link    	Edit shipping details
+    Wait Until Element Is Visible    link:Edit shipping details    timeout=15s
+    ${link}=    Get WebElement    link:Edit shipping details
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${link}

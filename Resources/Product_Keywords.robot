@@ -20,7 +20,8 @@ Click Product At Position And Get Name
     Wait Until Element Is Visible    ${PRODUCTS_LIST}    timeout=10s
     @{items}=    Get WebElements    ${PRODUCTS_LIST}
     ${index}=    Evaluate    ${position} - 1
-    ${product_name}=    Get Text    ${items}[${index}]
+    ${full_text}=       Get Text    ${items}[${index}]
+    ${product_name}=    Get Line    ${full_text}    0
     Execute Javascript    arguments[0].scrollIntoView({block: 'center', behavior: 'instant'});    ARGUMENTS    ${items}[${index}]
     Execute Javascript    arguments[0].click();    ARGUMENTS    ${items}[${index}]
     Wait Until Element Is Visible    ${PRODUCT_ADD_TO_CART}    timeout=10s
@@ -71,7 +72,7 @@ Select Product
     [Arguments]    ${categoty}    ${position}
     Click Product Category Picture    ${categoty}
     ${product_name}=    Click Product At Position And Get Name    ${position}
- #   RETURN     ${product_name}
+    RETURN    ${product_name}
 
 
 Add Selected Product To Cart And Verify Cart Preview
@@ -102,14 +103,13 @@ OLD Add Multiple Products To Cart
 Add Multiple Products To Cart
     [Arguments]    ${products}
     ${total_products}=    Get Length    ${products}
+    @{added_names}=    Create List
 
     FOR    ${index}    ${item}    IN ENUMERATE    @{products}
-        # Split string (max into 3 parts)
         ${parts}=       Split String    ${item}    |
         ${category}=    Set Variable    ${parts[0]}
         ${position}=    Set Variable    ${parts[1]}
 
-        # If quantity ia absend,  set quantity by default to 1
         ${parts_length}=    Get Length    ${parts}
             IF    ${parts_length} == 3
                   ${quantity}=    Set Variable    ${parts[2]}
@@ -117,13 +117,14 @@ Add Multiple Products To Cart
                   ${quantity}=    Set Variable    1
             END
 
-        Select Product    ${category}    ${position}
+        ${product_name}=    Select Product    ${category}    ${position}
         Set Product Quantity    ${quantity}
         Add Selected Product To Cart
+        Append To List    ${added_names}    ${product_name}
 
-        # if currnt product is not the last, Open main page
         ${current_step}=    Evaluate    ${index} + 1
         IF    ${current_step} < ${total_products}
             Open Main Page
         END
     END
+    RETURN    @{added_names}

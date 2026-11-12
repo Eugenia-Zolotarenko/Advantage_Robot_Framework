@@ -16,8 +16,21 @@ Open Shopping Cart Immediately After Adding Product
 Open Shopping Cart Any Time
     Wait For Overlay    css=div.PopUp
     Wait Until Element Is Not Visible     ${CART_PREVIEW}    timeout=10s
-    Click Element    ${CART_LINK}
+    ${cart_link}=    Get WebElement    ${CART_LINK}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${cart_link}
     Wait Until Page Contains    SHOPPING CART
+
+Open Shopping Cart To Verify Products
+    ${cart_link}=    Get WebElement    ${CART_LINK}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${cart_link}
+    Wait Until Page Contains    SHOPPING CART
+
+Cart Should Contain Products
+    [Arguments]    @{product_names}
+    FOR    ${name}    IN    @{product_names}
+        ${page_text}=    Get Text    css=body
+        Should Contain    ${page_text}    ${name}    ignore_case=True
+    END
 
 
 Proceed To Checkout
