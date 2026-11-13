@@ -10,5 +10,4 @@ Test Teardown   Close Browser
 Logged In User Sees Account Menu Options
     Login As User    ${VALID_USERNAME}    ${VALID_PASSWORD}
     Open User Menu
-    ${expected}=    Get Menu Items From File
-    Username Menu Should Contain    @{expected}
+    Account Menu Should Show All Options

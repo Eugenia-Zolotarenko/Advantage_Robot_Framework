@@ -5,20 +5,14 @@ Library    Collections
 Resource    ../Resources/Base_Keywords.robot
 
 *** Keywords ***
-Click User Menu Link
-    Wait Until Element Is Visible    ${ACCOUNT_USERNAME_LINK}    timeout=10s
-    Sleep    1s
-    Wait For Overlay    css=div.loader
-    ${link}=    Get WebElement    ${ACCOUNT_USERNAME_LINK}
-    Execute Javascript    arguments[0].click();    ARGUMENTS    ${link}
-
-
 Open User Menu
+    [Documentation]    Click user icon or username for an authorized user
     Click User Menu Link
     Wait Until Element Is Visible    ${ACCOUNT_USERNAME_MENU}    timeout=10s
 
 
 Username Menu Should Contain
+    [Documentation]  Verifies that all menu items are present.
     [Arguments]    @{expected_items}
 
     Wait For Overlay    css=div.PopUp
@@ -31,7 +25,14 @@ Username Menu Should Contain
     END
 
 Get Menu Items From File
+    [Documentation]    Reads expected account menu item names from Data/account_menu_items.csv
+    ...                and returns them as a list. Used to verify that all menu items are present.
     ${file_content}=    Get File    ${CURDIR}/../Data/account_menu_items.csv
     @{items}=    Split To Lines    ${file_content}
     RETURN    @{items}
+
+Account Menu Should Show All Options
+    [Documentation]    Verifies that all expected menu items from account_menu_items.csv are visible in the account menu.
+    ${expected}=    Get Menu Items From File
+    Username Menu Should Contain    @{expected}
 

@@ -25,7 +25,7 @@ DRAFT New User Can Register, Buy A Product And Sign Out
     Select Product    tablets    1
     Add Selected Product To Cart
     Cart Link Displayed Amount Of Products    1
-    Open Shopping Cart Immediately After Adding Product
+    Proceed To Checkout From Cart Popup
     Proceed To Checkout
     Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out
@@ -43,7 +43,7 @@ DRAFT User Can Sign In, Choose 3 Different Products, Buy Products And Sign Out
     Select Product      headphones    3
     Add Selected Product To Cart
     Cart Link Displayed Amount Of Products    3
-    Open Shopping Cart Immediately After Adding Product
+    Proceed To Checkout From Cart Popup
     Proceed To Checkout
     Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out
@@ -56,7 +56,7 @@ DRAFT User Can Sign In, Choose 3 Same Products, Buy Products And Sign Out
     Add Selected Product To Cart
     Add Selected Product To Cart
     Cart Link Displayed Amount Of Products    3
-    Open Shopping Cart Immediately After Adding Product
+    Proceed To Checkout From Cart Popup
     Proceed To Checkout
     Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out
@@ -71,7 +71,7 @@ DRAFT User Can Sign In, Choose 1 Diffrernt And 2 Same Products, Buy Products And
     Add Selected Product To Cart
     Add Selected Product To Cart
     Cart Link Displayed Amount Of Products    3
-    Open Shopping Cart Immediately After Adding Product
+    Proceed To Checkout From Cart Popup
     Proceed To Checkout
     Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out
@@ -86,16 +86,16 @@ DRAFT User Can Sign In, Choose 2 Same And 1 Diffrernt Product, Buy Products And 
     Select Product       mice      2
     Add Selected Product To Cart
     Cart Link Displayed Amount Of Products    3
-    Open Shopping Cart Immediately After Adding Product
+    Proceed To Checkout From Cart Popup
     Proceed To Checkout
     Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out
 
 DRAFT WITH PARAMETERS User Can Sign In, Choose 3 Different Products, Buy Products And Sign Out
     [Setup]    Prepare Existing User Session
-    Add Multiple Products To Cart    ${PRODUCTS_TO_BUY}
+    Add Products To Cart    ${PRODUCTS_TO_BUY}
     Cart Link Displayed Amount Of Products    3
-    Open Shopping Cart Immediately After Adding Product
+    Proceed To Checkout From Cart Popup
     Proceed To Checkout
     Checkout With SafePay         &{PAYMENT_CREDENTIALS}
     Sign Out

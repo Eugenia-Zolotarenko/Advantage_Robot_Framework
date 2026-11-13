@@ -7,16 +7,18 @@ Resource   Auth_Keywords.robot
 
 *** Keywords ***
 Enter Login Credentials
+    [Documentation]    Types username and password into the login form fields.
     [Arguments]    ${username}    ${password}
-
     Wait Until Element Is Visible    ${SIGN_IN_INPUT_USERNAME}
     Input Text          ${SIGN_IN_INPUT_USERNAME}    ${username}
     Input Password      ${SIGN_IN_INPUT_PASSWORD}    ${password}
 
 Click Sign In Button
+    [Documentation]    Clicks the Sign In submit button.
     Click Submit Button    ${SIGN_IN_BUTTON}
 
 Login As User
+    [Documentation]    Opens the login form, enters credentials and waits until the user is logged in.
     [Arguments]    ${username}    ${password}
     Wait For Overlay    css:div.loader
     Open Authorization Form
@@ -25,6 +27,8 @@ Login As User
     Wait Until Element Is Not Visible    ${SIGN_IN_INPUT_USERNAME}    timeout=15s
 
 Login Should Fail With Invalid Credentials
+    [Documentation]    Verifies that login with invalid credentials shows an error message
+    ...                and the user remains on the login page.
     [Arguments]    ${username}    ${password}
     Wait For Overlay    css:div.loader
     Open Authorization Form
@@ -35,6 +39,8 @@ Login Should Fail With Invalid Credentials
     Element Should Not Be Visible    ${ACCOUNT_USERNAME_MENU}
 
 Login Form Should Require Fields When Empty
+    [Documentation]    Verifies that the Sign In button is disabled and validation messages appear
+    ...                when both fields are left empty and focus is moved away.
     Wait For Overlay    css:div.loader
     Open Authorization Form
     Wait For Overlay    css=div.loader
@@ -48,12 +54,14 @@ Login Form Should Require Fields When Empty
     Element Should Not Be Visible     ${ACCOUNT_USERNAME_MENU}
 
 Login Button Should Be Disabled Without Username
+    [Documentation]    Verifies that the Sign In button is disabled when only the password is filled in.
     Wait For Overlay    css:div.loader
     Open Authorization Form
     Input Password    ${SIGN_IN_INPUT_PASSWORD}    ${VALID_PASSWORD}
     Element Should Be Disabled    ${SIGN_IN_BUTTON}
 
 Login Button Should Be Disabled Without Password
+    [Documentation]    Verifies that the Sign In button is disabled when only the username is filled in.
     Wait For Overlay    css:div.loader
     Open Authorization Form
     Input Text    ${SIGN_IN_INPUT_USERNAME}    ${VALID_USERNAME}

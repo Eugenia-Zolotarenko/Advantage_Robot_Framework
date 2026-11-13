@@ -9,7 +9,7 @@ New User Can Register With Valid Data
     Open Browser To Homepage
     Title Should Contain    Advantage Shopping
     Open Registration Form
-    Enter Valid Registration Data     ${username}    ${email}    ${VALID_PASSWORD}
+    Fill Registration Form     ${username}    ${email}    ${VALID_PASSWORD}
     Click Register Button
     Account Username Should Equal    ${username}
     [Teardown]    Close Browser

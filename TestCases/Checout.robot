@@ -16,9 +16,8 @@ Logged In User Can Checout With SafePay Payment Method
     Login As User    ${VALID_USERNAME}    ${VALID_PASSWORD}
     Select Product    tablets    1
     Add Selected Product To Cart
-    Open Shopping Cart Immediately After Adding Product
-    Proceed To Checkout
-        Fill shipping details
+    Proceed To Checkout From Cart Popup
+    Fill Shipping Details    &{SHIPPING_DETAILS}
      Click Button Next
     Choose SafePay Payment Method
     Fill Valid Payments Credentionals    &{PAYMENT_CREDENTIALS}

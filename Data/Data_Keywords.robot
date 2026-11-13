@@ -91,10 +91,46 @@ Resource   ../Resources/Locators.robot
 ...    mice|2|2
 ...    headphones|5|1
 
+# Users
+${VALID_USERNAME_2}    user10195317
+${VALID_USERNAME_3}    user10195449
+
+# Shipping addresses
+&{SHIPPING_DETAILS}
+...    first_name=First Name
+...    last_name=Last Name
+...    phone=+0123456789
+...    country=Austria
+...    city=City
+...    address=Street, house, flat
+...    postal_code=0123456789
+...    state=Bayern
+
+&{SHIPPING_VIENNA}
+...    first_name=Alice
+...    last_name=Johnson
+...    phone=+4316012345
+...    country=Austria
+...    city=Vienna
+...    address=Mariahilfer Str 55
+...    postal_code=1060
+...    state=Wien
+
+&{SHIPPING_GRAZ}
+...    first_name=Bob
+...    last_name=Smith
+...    phone=+43316123456
+...    country=Austria
+...    city=Graz
+...    address=Herrengasse 10
+...    postal_code=8010
+...    state=Steiermark
+
 *** Keywords ***
 Generate Unique User
-    [Documentation]    Return uniq username и email (based on current date and time).
-    ...                Username: 'user' + ddHHmmss = 12 symbols (on site 15).
+    [Documentation]    Generates a unique username and email based on the current timestamp.
+    ...                Returns two values: ${username} and ${email}.
+    ...                Example: ${username}    ${email}=    Generate Unique User
     ${timestamp}=    Get Current Date    result_format=%d%H%M%S
     ${username}=     Set Variable    user${timestamp}
     ${email}=        Set Variable    ${username}@test.com

@@ -1,28 +1,14 @@
 *** Settings ***
-Resource    ../Resources/Base_Keywords.robot
-Resource    ../Resources/Sign_In_Keywords.robot
-Resource    ../Data/Data_Keywords.robot
-Resource    ../Resources/Cart_Keywords.robot
-
+Resource    ../Resources/Select_Product_Keywords.robot
 
 Test Setup      Open Browser To Homepage
 Test Teardown   Close Browser
 
-*** Test Cases ***
-Logged In User Can Open Shopping Cart Immediately After Adding Product
-       Login As User    ${VALID_USERNAME}    ${VALID_PASSWORD}
-       Select Product                tablets    1
-       Add Selected Product To Cart
-       Open Shopping Cart Immediately After Adding Product
+Test Template    User Adds Product And Verifies Cart Contents
 
-       Sleep     5s
-
-
-Logged In User Can Open Shopping Cart Any Time
-       Login As User    ${VALID_USERNAME}    ${VALID_PASSWORD}
-       Select Product                tablets    1
-       Add Selected Product To Cart
-       Open Shopping Cart Any Time
-
-
-       Sleep     5s
+*** Test Cases ***                                      CATEGORY      POSITION
+Logged In User Can Open Cart - Tablet                   tablets       2
+Logged In User Can Open Cart - Speaker                  speakers      4
+Logged In User Can Open Cart - Headphones               headphones    1
+Logged In User Can Open Cart - Laptop                   laptops       2
+Logged In User Can Open Cart - Mouse                    mice          1
