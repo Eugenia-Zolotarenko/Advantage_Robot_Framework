@@ -153,10 +153,20 @@ The project includes a `Jenkinsfile` with:
 All paths in the pipeline are relative to the workspace root, so the project runs on any machine without configuration changes.
 
 ### Jenkins prerequisites
-- Python 3.x must be available in the system `PATH`
-- A supported browser and its WebDriver must be installed
+- **Python 3.x** must be installed with **"Add Python to PATH"** checked during installation — this makes `python` available to the Jenkins service automatically
+- **Jenkins** must be installed and running as a service
+- A supported browser must be installed (Chrome, Firefox, or Edge); WebDriver is managed automatically by Selenium
 
-> Note: headless Edge is not supported in Jenkins due to profile path issues. Use `headlesschrome` or `headlessfirefox` for CI runs.
+> **Note:** If Python was installed without adding it to PATH, add `C:\PythonXXX` and `C:\PythonXXX\Scripts` to **System variables → Path** (not user variables), then restart the Jenkins service.
+
+> **Note:** headless Edge is not supported in Jenkins due to profile path issues. Use `headlesschrome` or `headlessfirefox` for CI runs.
+
+### Jenkins job setup
+1. New Item → Pipeline
+2. Under **Pipeline**: set Definition to `Pipeline script from SCM`
+3. SCM: `Git`, Repository URL: `https://github.com/Eugenia-Zolotarenko/Advantage_Robot_Framework`
+4. Script Path: `Jenkinsfile` (or `Jenkinsfile.register` for the registration flow pipeline)
+5. Save → Build Now
 
 ---
 
