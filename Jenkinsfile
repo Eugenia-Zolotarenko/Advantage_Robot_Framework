@@ -31,7 +31,7 @@ pipeline {
             steps {
                 bat """
                     if not exist docs mkdir docs
-                    for %f in (Resources\\*_Keywords.robot) do .venv\\Scripts\\python.exe -m robot.libdoc "%f" "docs\\%%~nf.html"
+                    for %%f in (Resources\\*_Keywords.robot) do .venv\\Scripts\\python.exe -m robot.libdoc "%%f" "docs\\%%~nf.html"
                 """
             }
         }
