@@ -15,7 +15,7 @@ Resource    ../Resources/Variables.robot
 Run Purchase Flow From List
     [Documentation]    Converts a Robot Framework list of products to a semicolon-separated string
     ...                and delegates to User Can Sign In, Buy Selected Products And Sign Out.
-    ...                Used in Purchase_Flow_Three_Products_old.robot with list variables from Data_Keywords.robot.
+    ...                Used in Purchase_Flow_Three_Products_From_List.robot with list variables from Data_Keywords.robot.
     ...                Products format: category|position|quantity (e.g. mice|1|1).
     ...                Browser is opened and closed inside the delegated keyword.
     [Arguments]    ${products}    ${username}=${VALID_USERNAME}    ${shipping}=&{SHIPPING_DETAILS}

@@ -10,15 +10,15 @@ Automated test suite for [Advantage Online Shopping](http://www.advantageonlines
 Registration → Login → Select product → Add to cart → Checkout with SafePay → Sign out
 
 Implemented in two ways:
-- `Purchase_Flow_New_User.robot` — DataDriver reads product combinations from `Data/register_flow_data.csv`
-- `Register_Flow.robot` — parameterized with Test Template and inline data table
+- `Purchase_Flow_New_User_From_File.robot` — DataDriver reads product combinations from `Data/register_flow_data.csv`
+- `Purchase_Flow_New_User_From_List.robot` — parameterized with Test Template and list variables from `Data/Data_Keywords.robot`
 
 **Scenario 2 — Existing User Purchase Flow (3 products)**
 Login → Select 3 products → Add to cart → Verify cart contents → Checkout with SafePay → Sign out
 
 Implemented in two ways:
-- `Purchase_Flow_Three_Products.robot` — DataDriver reads product combinations from `Data/purchase_flow_data.csv`
-- `Purchase_Flow_Three_Products_old.robot` — uses list variables from `Data/Data_Keywords.robot` (demonstrates manual test-case approach without DataDriver)
+- `Purchase_Flow_Three_Products_From_File.robot` — DataDriver reads product combinations from `Data/purchase_flow_data.csv`
+- `Purchase_Flow_Three_Products_From_List.robot` — uses list variables from `Data/Data_Keywords.robot` (demonstrates manual test-case approach without DataDriver)
 
 Additional test suites cover: sign-in (positive and negative), account menu, product selection, cart verification, and checkout steps.
 
@@ -32,12 +32,13 @@ Additional test suites cover: sign-in (positive and negative), account menu, pro
 
 ### Python packages
 
+Defined in `requirements.txt`:
+
 | Package | Version |
 |---|---|
 | robotframework | 7.5.1 |
 | robotframework-seleniumlibrary | 6.9.0 |
 | robotframework-datadriver | 1.11.2 |
-| selenium | 4.52.0 |
 
 ---
 
@@ -45,7 +46,7 @@ Additional test suites cover: sign-in (positive and negative), account menu, pro
 
 ```bash
 # 1. Clone the repository
-git clone <repository-url>
+git clone https://github.com/Eugenia-Zolotarenko/Advantage_Robot_Framework
 cd AdvantageProject
 
 # 2. Create and activate virtual environment
@@ -53,9 +54,7 @@ python -m venv .venv
 .venv\Scripts\activate
 
 # 3. Install dependencies
-pip install robotframework==7.5.1
-pip install robotframework-seleniumlibrary==6.9.0
-pip install robotframework-datadriver==1.11.2
+pip install -r requirements.txt
 ```
 
 ---
@@ -64,23 +63,23 @@ pip install robotframework-datadriver==1.11.2
 
 ### Run main purchase flow (DataDriver, all CSV rows)
 ```bash
-robot -d Output\ TestCases\Purchase_Flow_Three_Products.robot
+robot -d Output\ --randomize tests TestCases\Purchase_Flow_Three_Products_From_File.robot
 ```
 
 ### Run all test suites
 ```bash
-robot -d Output\ TestCases\
+robot -d Output\ --randomize tests TestCases\
 ```
 
 ### Run with a specific browser
 ```bash
-robot -d Output\ -v BROWSER:firefox TestCases\
+robot -d Output\ --randomize tests -v BROWSER:firefox TestCases\
 ```
 Supported values: `chrome`, `firefox`, `edge`, `headlesschrome`, `headlessfirefox`
 
 ### Run only negative login tests
 ```bash
-robot -d Output\ --include negative TestCases\Sign_In.robot
+robot -d Output\ --randomize tests --include negative TestCases\Sign_In.robot
 ```
 
 ---
@@ -90,8 +89,10 @@ robot -d Output\ --include negative TestCases\Sign_In.robot
 ```
 AdvantageProject/
 ├── TestCases/                  # Test suites (business-level keywords only)
-│   ├── Purchase_Flow_Three_Products.robot   # Scenario 2 — DataDriver-based
-│   ├── Purchase_Flow_New_User.robot         # Scenario 1 — new user registration
+│   ├── Purchase_Flow_Three_Products_From_File.robot   # Scenario 2 — DataDriver-based
+│   ├── Purchase_Flow_Three_Products_From_List.robot   # Scenario 2 — list variables
+│   ├── Purchase_Flow_New_User_From_File.robot   # Scenario 1 — DataDriver-based
+│   ├── Purchase_Flow_New_User_From_List.robot  # Scenario 1 — list variables
 │   ├── Sign_In.robot                        # Login tests (positive + negative)
 │   ├── Registration.robot
 │   ├── Cart.robot
@@ -142,11 +143,18 @@ Open any `docs\*_Keywords.html` file in a browser to browse the keyword referenc
 ## CI/CD — Jenkins
 
 The project includes a `Jenkinsfile` with:
+- **Setup** stage — creates `.venv` and installs dependencies from `requirements.txt`
 - **Scheduled run** every day at 02:00
 - **Browser selection** via build parameter
-- **Purchase Flow** stage — runs `Purchase_Flow_Three_Products.robot`
+- **Purchase Flow** stage — runs `Purchase_Flow_Three_Products_From_File.robot`
 - **Generate Keyword Docs** stage — regenerates HTML documentation
 - **Robot Framework plugin** for test results with pass threshold 90%
+
+All paths in the pipeline are relative to the workspace root, so the project runs on any machine without configuration changes.
+
+### Jenkins prerequisites
+- Python 3.x must be available in the system `PATH`
+- A supported browser and its WebDriver must be installed
 
 > Note: headless Edge is not supported in Jenkins due to profile path issues. Use `headlesschrome` or `headlessfirefox` for CI runs.
 

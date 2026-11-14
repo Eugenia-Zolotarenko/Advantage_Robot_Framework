@@ -85,7 +85,7 @@ Example: `laptops|3|1;mice|1|2` — 1 laptop from position 3 and 2 mice from pos
 ## Run by tag
 
 ```bash
-robot -d Output\ --include smoke C:\QA\AdvantageProject\TestCases\Purchase_Flow_Three_Products.robot
+robot -d Output\ --include smoke C:\QA\AdvantageProject\TestCases\Purchase_Flow_Three_Products_From_File.robot
 ```
 
 > Note: `--include` does not work with DataDriver. Use the `include=` parameter in the Library declaration inside the test file instead.

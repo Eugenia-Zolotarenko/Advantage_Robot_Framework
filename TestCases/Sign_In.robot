@@ -17,11 +17,11 @@ Registered User Can Login With Valid Credentials
 # --- Negative Tests---
 Login Fails With Wrong Password
     [Tags]    negative    login
-    Login Should Fail With Invalid Credentials    fake_user_negative    wrongPassword123
+    Login Should Fail With Invalid Credentials    ${VALID_USERNAME}    wrongPassword123
 
 Login Fails With Wrong Username
     [Tags]    negative    login
-    Login Should Fail With Invalid Credentials    nonexistent_user_xyz    wrongPassword456
+    Login Should Fail With Invalid Credentials    nonexistent_user_xyz    ${VALID_PASSWORD}
 
 Login Form Shows Validation For Empty Fields
     [Tags]    negative    login

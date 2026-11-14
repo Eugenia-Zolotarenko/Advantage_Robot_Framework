@@ -14,9 +14,25 @@ pipeline {
     }
 
     stages {
+        stage('Setup') {
+            steps {
+                bat """
+                    if not exist .venv python -m venv .venv
+                    .venv\\Scripts\\pip.exe install -r requirements.txt
+                """
+            }
+        }
         stage('Register Flow') {
             steps {
-                bat "C:\\QA\\AdvantageProject\\.venv\\Scripts\\robot.exe -d Output\\ -v BROWSER:${params.BROWSER} --randomize tests C:\\QA\\AdvantageProject\\TestCases\\Register_Flow.robot"
+                bat ".venv\\Scripts\\robot.exe -d Output\\ -v BROWSER:${params.BROWSER} --randomize tests TestCases\\Purchase_Flow_New_User_From_File.robot"
+            }
+        }
+        stage('Generate Keyword Docs') {
+            steps {
+                bat """
+                    if not exist docs mkdir docs
+                    for %f in (Resources\\*_Keywords.robot) do .venv\\Scripts\\python.exe -m robot.libdoc "%f" "docs\\%%~nf.html"
+                """
             }
         }
     }

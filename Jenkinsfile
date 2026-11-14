@@ -14,16 +14,24 @@ pipeline {
     }
 
     stages {
+        stage('Setup') {
+            steps {
+                bat """
+                    if not exist .venv python -m venv .venv
+                    .venv\\Scripts\\pip.exe install -r requirements.txt
+                """
+            }
+        }
         stage('Purchase Flow') {
             steps {
-                bat "C:\\QA\\AdvantageProject\\.venv\\Scripts\\robot.exe -d Output\\ -v BROWSER:${params.BROWSER} --randomize tests C:\\QA\\AdvantageProject\\TestCases\\Purchase_Flow_Three_Products.robot"
+                bat ".venv\\Scripts\\robot.exe -d Output\\ -v BROWSER:${params.BROWSER} --randomize tests TestCases\\Purchase_Flow_Three_Products_From_File.robot"
             }
         }
         stage('Generate Keyword Docs') {
             steps {
                 bat """
-                    if not exist C:\\QA\\AdvantageProject\\docs mkdir C:\\QA\\AdvantageProject\\docs
-                    for %f in (C:\\QA\\AdvantageProject\\Resources\\*_Keywords.robot) do C:\\QA\\AdvantageProject\\.venv\\Scripts\\python.exe -m robot.libdoc "%f" "C:\\QA\\AdvantageProject\\docs\\%%~nf.html"
+                    if not exist docs mkdir docs
+                    for %f in (Resources\\*_Keywords.robot) do .venv\\Scripts\\python.exe -m robot.libdoc "%f" "docs\\%%~nf.html"
                 """
             }
         }
