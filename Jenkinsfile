@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Purchase Flow') {
             steps {
-                bat ".venv\\Scripts\\robot.exe -d Output\\ -v BROWSER:${params.BROWSER} --randomize tests TestCases\\Purchase_Flow_Three_Products_From_File.robot || exit 0"
+                bat ".venv\\Scripts\\robot.exe -d Output\\ -v BROWSER:${params.BROWSER} TestCases\\Purchase_Flow_Three_Products_From_File.robot || exit 0"
             }
         }
         stage('Generate Keyword Docs') {
