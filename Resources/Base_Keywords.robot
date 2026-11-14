@@ -21,7 +21,7 @@ Click Element With JS
     Execute Javascript    arguments[0].click();    ARGUMENTS    ${element}
 
 Open Browser To Homepage
-    [Documentation]    Opens the browser and navigates to BASE_URL at 1920x1400.
+    [Documentation]    Opens the browser and navigates to BASE_URL at 1920x2000.
     ...                Use BROWSER=headlessedge for local headless runs; standard browsers (firefox, edge) work in Jenkins.
     IF    '${BROWSER}' == 'headlessedge'
         ${options}=    Evaluate    sys.modules['selenium.webdriver'].EdgeOptions()    sys
@@ -41,7 +41,7 @@ Open Browser To Homepage
     ELSE
         Open Browser    ${BASE_URL}    ${BROWSER}
     END
-    Set Window Size        1920    1400
+    Set Window Size        1920    2000
     Set Window Position    0       0
 
 Title Should Contain
