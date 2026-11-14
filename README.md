@@ -1,0 +1,165 @@
+# Advantage Online Shopping — Robot Framework Test Automation
+
+Automated test suite for [Advantage Online Shopping](http://www.advantageonlineshopping.com) — a demo e-commerce application by OpenText. Built with the **Keyword Driven Testing** approach using Robot Framework.
+
+---
+
+## Test Scenarios
+
+**Scenario 1 — New User Purchase Flow**
+Registration → Login → Select product → Add to cart → Checkout with SafePay → Sign out
+
+Implemented in two ways:
+- `Purchase_Flow_New_User.robot` — DataDriver reads product combinations from `Data/register_flow_data.csv`
+- `Register_Flow.robot` — parameterized with Test Template and inline data table
+
+**Scenario 2 — Existing User Purchase Flow (3 products)**
+Login → Select 3 products → Add to cart → Verify cart contents → Checkout with SafePay → Sign out
+
+Implemented in two ways:
+- `Purchase_Flow_Three_Products.robot` — DataDriver reads product combinations from `Data/purchase_flow_data.csv`
+- `Purchase_Flow_Three_Products_old.robot` — uses list variables from `Data/Data_Keywords.robot` (demonstrates manual test-case approach without DataDriver)
+
+Additional test suites cover: sign-in (positive and negative), account menu, product selection, cart verification, and checkout steps.
+
+---
+
+## Requirements
+
+- Python 3.x
+- Google Chrome / Firefox / Microsoft Edge
+- Corresponding WebDriver (managed automatically by Selenium)
+
+### Python packages
+
+| Package | Version |
+|---|---|
+| robotframework | 7.5.1 |
+| robotframework-seleniumlibrary | 6.9.0 |
+| robotframework-datadriver | 1.11.2 |
+| selenium | 4.52.0 |
+
+---
+
+## Installation
+
+```bash
+# 1. Clone the repository
+git clone <repository-url>
+cd AdvantageProject
+
+# 2. Create and activate virtual environment
+python -m venv .venv
+.venv\Scripts\activate
+
+# 3. Install dependencies
+pip install robotframework==7.5.1
+pip install robotframework-seleniumlibrary==6.9.0
+pip install robotframework-datadriver==1.11.2
+```
+
+---
+
+## Running Tests
+
+### Run main purchase flow (DataDriver, all CSV rows)
+```bash
+robot -d Output\ TestCases\Purchase_Flow_Three_Products.robot
+```
+
+### Run all test suites
+```bash
+robot -d Output\ TestCases\
+```
+
+### Run with a specific browser
+```bash
+robot -d Output\ -v BROWSER:firefox TestCases\
+```
+Supported values: `chrome`, `firefox`, `edge`, `headlesschrome`, `headlessfirefox`
+
+### Run only negative login tests
+```bash
+robot -d Output\ --include negative TestCases\Sign_In.robot
+```
+
+---
+
+## Project Structure
+
+```
+AdvantageProject/
+├── TestCases/                  # Test suites (business-level keywords only)
+│   ├── Purchase_Flow_Three_Products.robot   # Scenario 2 — DataDriver-based
+│   ├── Purchase_Flow_New_User.robot         # Scenario 1 — new user registration
+│   ├── Sign_In.robot                        # Login tests (positive + negative)
+│   ├── Registration.robot
+│   ├── Cart.robot
+│   ├── Checout.robot
+│   └── ...
+│
+├── Resources/                  # Keyword libraries (technical implementation)
+│   ├── Base_Keywords.robot
+│   ├── Product_Keywords.robot
+│   ├── Cart_Keywords.robot
+│   ├── Checkout_Keywords.robot
+│   ├── Purchase_Flow_Keywords.robot
+│   ├── Sign_In_Keywords.robot
+│   ├── Sign_Out_Keywords.robot
+│   ├── Register_New_User_Keywords.robot
+│   ├── Auth_Keywords.robot
+│   ├── Account_Menu_Keywords.robot
+│   ├── Select_Product_Keywords.robot
+│   ├── Locators.robot          # All UI locators
+│   └── Variables.robot         # Configuration variables
+│
+├── Data/                       # Test data
+│   ├── purchase_flow_data.csv  # Product combinations for Scenario 2
+│   ├── register_flow_data.csv  # Product combinations for Scenario 1
+│   ├── account_menu_items.csv  # Expected account menu items
+│   └── Data_Keywords.robot     # Test data keywords (users, shipping addresses)
+│
+├── docs/                       # Keyword documentation (HTML)
+├── Output/                     # Test results (log.html, report.html)
+└── Jenkinsfile                 # CI/CD pipeline definition
+```
+
+---
+
+## Keyword Documentation
+
+HTML documentation for all keyword libraries is generated with `libdoc` and available in the `docs/` folder.
+
+To regenerate after changes:
+```bash
+for %f in (Resources\*_Keywords.robot) do .venv\Scripts\python.exe -m robot.libdoc "%f" "docs\%~nf.html"
+```
+
+Open any `docs\*_Keywords.html` file in a browser to browse the keyword reference.
+
+---
+
+## CI/CD — Jenkins
+
+The project includes a `Jenkinsfile` with:
+- **Scheduled run** every day at 02:00
+- **Browser selection** via build parameter
+- **Purchase Flow** stage — runs `Purchase_Flow_Three_Products.robot`
+- **Generate Keyword Docs** stage — regenerates HTML documentation
+- **Robot Framework plugin** for test results with pass threshold 90%
+
+> Note: headless Edge is not supported in Jenkins due to profile path issues. Use `headlesschrome` or `headlessfirefox` for CI runs.
+
+---
+
+## Test Data
+
+Product combinations for the purchase flow are defined in `Data/purchase_flow_data.csv`.  
+Each row follows the format: `category|position` or `category|position|quantity` (semicolon-separated for multiple products).
+
+Example:
+```
+products_string
+mice|1;speakers|2;headphones|1
+tablets|1;laptops|2;mice|3
+```

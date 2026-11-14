@@ -17,7 +17,8 @@ Click Submit Button
     [Arguments]    ${locator}
     Wait For Overlay    css:div.loader
     Sleep    1s
-    Click Element    ${locator}
+    Wait Until Element Is Visible    ${locator}    timeout=10s
+    Click Element With JS    ${locator}
 
 Account Username Should Equal
     [Documentation]    Verifies that the username displayed in the header matches the expected value.

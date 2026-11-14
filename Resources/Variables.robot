@@ -4,7 +4,7 @@ Resource    Locators.robot
 *** Variables ***
 ${BASE_URL}    http://www.advantageonlineshopping.com
 ${BROWSER}    chrome
-${VALID_USERNAME}    user09200413
+${VALID_USERNAME}    user12075220
 ${VALID_PASSWORD}    secretpad0rD
 
 &{CATEGORY_LOCATORS}

@@ -36,8 +36,10 @@ Cart Should Contain Products
 Proceed To Checkout
     [Documentation]    Clicks the Checkout button on the Shopping Cart page and waits for the Order Payment page.
     Wait For Overlay    css=div.loader
-    Scroll Element Into View    ${CART_CHECKOUT_BUTTON}
+    Wait Until Page Contains    SHOPPING CART    timeout=15s
+    Wait Until Element Is Visible    ${CART_CHECKOUT_BUTTON}    timeout=15s
     ${btn}=    Get WebElement    ${CART_CHECKOUT_BUTTON}
+    Execute Javascript    arguments[0].scrollIntoView({block: 'center', behavior: 'instant'});    ARGUMENTS    ${btn}
     Execute Javascript    arguments[0].click();    ARGUMENTS    ${btn}
     Wait Until Page Contains    ORDER PAYMENT
 

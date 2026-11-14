@@ -18,6 +18,8 @@ Register And Buy Products Using Data From File
 
 *** Keywords ***
 Run Register Flow
+    [Documentation]    DataDriver template keyword — must stay in this file because DataDriver requires
+    ...                the Test Template keyword to be defined in the same file as the test cases.
     [Arguments]    ${products_string}    ${password}=${VALID_PASSWORD}
     ...    ${safepay_username}=testSafePay    ${safepay_password}=testPSW1
     ...    ${first_name}=First Name    ${last_name}=Last Name    ${phone}=+0123456789
