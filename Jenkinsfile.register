@@ -17,7 +17,7 @@ pipeline {
         stage('Setup') {
             steps {
                 bat """
-                    if not exist .venv python -m venv .venv
+                    if not exist .venv py -m venv .venv
                     .venv\\Scripts\\pip.exe install -r requirements.txt
                 """
             }
