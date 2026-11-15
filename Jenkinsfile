@@ -8,8 +8,8 @@ pipeline {
     parameters {
         choice(
             name: 'BROWSER',
-            choices: ['headlesschrome', 'headlessfirefox', 'chrome', 'firefox', 'edge'],
-            description: 'Browser to run tests in'
+            choices: ['headlesschrome', 'headlessfirefox'],
+            description: 'Browser to run tests in (headless only — GUI browsers require a display)'
         )
     }
 
