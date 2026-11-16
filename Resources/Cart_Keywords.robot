@@ -7,6 +7,16 @@ Resource    Product_Keywords.robot
 Resource    Locators.robot
 
 *** Keywords ***
+Cart Preview Should Displayed Added Product
+    [Documentation]    Verifies that the cart preview popup shows the expected product name.
+    ...                Uses only the first 20 characters for comparison because the popup truncates long names.
+    [Arguments]    ${product_name}
+    Wait Until Element Is Visible    ${CART_PREVIEW}
+    Page Should Contain Element    ${CART_PREVIEW}
+    ${cart_text}=    Get Text    ${CART_PREVIEW}
+    ${short_name}=    Get Substring    ${product_name}    0    20
+    Should Contain    ${cart_text}    ${short_name}    ignore_case=True
+
 Proceed To Checkout From Cart Popup
     [Documentation]    Clicks the Checkout button in the cart popup and waits for the Order Payment page.
     Wait Until Element Is Visible     ${CHECKOUT_BUTTON_POP_UP}

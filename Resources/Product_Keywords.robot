@@ -79,16 +79,6 @@ Click And Wait For Cart Popup
     Wait Until Element Is Visible    ${CHECKOUT_BUTTON_POP_UP}    timeout=6s
 
 
-Cart Preview Should Displayed Added Product
-    [Documentation]    Verifies that the cart preview popup shows the expected product name.
-    ...                Uses only the first 20 characters for comparison because the popup truncates long names.
-    [Arguments]    ${product_name}
-    Wait Until Element Is Visible    ${CART_PREVIEW}
-    Page Should Contain Element    ${CART_PREVIEW}
-    ${cart_text}=    Get Text    ${CART_PREVIEW}
-    ${short_name}=    Get Substring    ${product_name}    0    20
-    Should Contain    ${cart_text}    ${short_name}    ignore_case=True
-
 
 Select Product
     [Documentation]    Opens a product category and clicks the product at the given position.
