@@ -100,7 +100,7 @@ ${VALID_USERNAME_3}    user10195449
 ...    first_name=First Name
 ...    last_name=Last Name
 ...    phone=+0123456789
-...    country=Austria
+...    country=Germany
 ...    city=City
 ...    address=Street, house, flat
 ...    postal_code=0123456789

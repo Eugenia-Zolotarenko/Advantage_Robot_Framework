@@ -24,16 +24,16 @@ Buy 1 Tablet And 2 Speakers   ${MIXED_SET_1}    ${VALID_USERNAME_2}    ${SHIPPIN
 Buy 2 Mouse And 1 Headphones  ${MIXED_SET_2}    ${VALID_USERNAME_3}    ${SHIPPING_VIENNA}
 
 #----Buy Three Same Products---
-Buy Three Laptops    ${THREE_LAPTOPS_SET}
-Buy Three Tablets    ${THREE_TABLETS_SET}
-Buy Three Speakers    ${THREE_SPEAKERS_SET}
-Buy Three Mice        ${THREE_MICE_SET}
+Buy Three Laptops       ${THREE_LAPTOPS_SET}
+Buy Three Tablets       ${THREE_TABLETS_SET}
+Buy Three Speakers      ${THREE_SPEAKERS_SET}
+Buy Three Mice          ${THREE_MICE_SET}
 Buy Three Headphones    ${THREE_HEADPHONES_SET}
 
 
 #----Buy Same Product Different Models---
-Buy Three Different Models Of Laptops    ${THREE_MODELS_LAPTOP_SET}
-Buy Three Different Models Of Tablets    ${THREE_MODELS_TABLET_SET}
-Buy Three Different Models Of Speakers    ${THREE_MODELS_SPEAKER_SET}
-Buy Three Different Models Of Mice        ${THREE_MODELS_MOUSE_SET}
+Buy Three Different Models Of Laptops       ${THREE_MODELS_LAPTOP_SET}
+Buy Three Different Models Of Tablets       ${THREE_MODELS_TABLET_SET}
+Buy Three Different Models Of Speakers      ${THREE_MODELS_SPEAKER_SET}
+Buy Three Different Models Of Mice          ${THREE_MODELS_MOUSE_SET}
 Buy Three Different Models Of Headphones    ${THREE_MODELS_HEADPHONES_SET}

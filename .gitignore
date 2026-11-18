@@ -3,6 +3,7 @@ output.xml
 log.html
 report.html
 Output/
+results/
 selenium-screenshot-*.png
 
 # Python virtual environment

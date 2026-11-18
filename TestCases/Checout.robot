@@ -18,7 +18,7 @@ Logged In User Can Checout With SafePay Payment Method
     Add Selected Product To Cart
     Proceed To Checkout From Cart Popup
     Fill Shipping Details    &{SHIPPING_DETAILS}
-     Click Button Next
+    Click Button Next
     Choose SafePay Payment Method
     Fill Valid Payments Credentionals    &{PAYMENT_CREDENTIALS}
     Click Button Pay Now
