@@ -10,8 +10,9 @@ Resource   Auth_Keywords.robot
 Open Registration Form
     [Documentation]    Opens the sign-in overlay and clicks "Create new account" to show the registration form.
     Open Authorization Form
+    Wait For Overlay    css=div.loader
     Scroll Element Into View     ${CREATE_NEW_ACCOUNT_BUTTON}
-    Click Element     ${CREATE_NEW_ACCOUNT_BUTTON}
+    Click Element With JS    ${CREATE_NEW_ACCOUNT_BUTTON}
 
 Fill Registration Form
     [Documentation]    Fills in the registration form with username, email and password, and checks the agreement checkbox.
