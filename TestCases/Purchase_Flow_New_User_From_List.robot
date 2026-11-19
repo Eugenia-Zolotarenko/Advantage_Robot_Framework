@@ -10,7 +10,7 @@ Resource    ../Resources/Product_Keywords.robot
 Resource    ../Resources/Cart_Keywords.robot
 Resource    ../Resources/Checkout_Keywords.robot
 
-Test Template    New User Can Register, Buy A Product And Sign Out
+Test Template    Run New User Purchase Flow From List
 Test Tags        control_run
 *** Test Cases ***
 

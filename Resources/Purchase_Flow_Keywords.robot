@@ -12,6 +12,15 @@ Resource    ../Resources/Variables.robot
 
 *** Keywords ***
 
+Run New User Purchase Flow From List
+    [Documentation]    Converts a Robot Framework list of products to a semicolon-separated string
+    ...                and delegates to New User Can Register, Buy A Product And Sign Out.
+    ...                Used in Purchase_Flow_New_User_From_List.robot with list variables from Data_Keywords.robot.
+    ...                Products format: category|position|quantity (e.g. tablets|2|1).
+    [Arguments]    ${products}
+    ${products_string}=    Catenate    SEPARATOR=;    @{products}
+    New User Can Register, Buy A Product And Sign Out    ${products_string}
+
 Run Purchase Flow From List
     [Documentation]    Converts a Robot Framework list of products to a semicolon-separated string
     ...                and delegates to User Can Sign In, Buy Selected Products And Sign Out.
